@@ -1,29 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>madzi.apps</groupId>
+    <groupId>madzi</groupId>
     <artifactId>booklet</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Booklet</name>
-    <description>Ebook Management System</description>
+    <description>EBook management system</description>
 
     <properties>
         <top.dir>.</top.dir>
         <encoding>UTF-8</encoding>
+        <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
         <java.version>17</java.version>
         <java.vendor>gluon</java.vendor>
-        <exec.mainClass>madzi.apps.booklet.Booklet</exec.mainClass>
-        <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
+        <exec.mainClass>madzi.booklet.Starter</exec.mainClass>
+        <!-- Dependencies -->
+        <version.lib.hocon>1.4.2</version.lib.hocon>
+        <version.lib.slf4j>2.0.7</version.lib.slf4j>
+        <version.lib.logback>1.4.11</version.lib.logback>
+        <version.lib.h2>2.1.214</version.lib.h2>
+        <version.lib.hibernate>6.2.2.Final</version.lib.hibernate>
+        <version.lib.weld-se>5.1.0.Final</version.lib.weld-se>
+        <version.lib.javafx>20.0.1</version.lib.javafx>
+        <!-- Test dependencies -->
+        <version.test.lib.junit>5.9.3</version.test.lib.junit>
+        <!-- Plugins -->
+        <version.plugin.gitflow>1.19.0</version.plugin.gitflow>
+        <version.plugin.javafx-maven-plugin>0.0.8</version.plugin.javafx-maven-plugin>
+        <version.plugin.surefire>3.0.0</version.plugin.surefire>
+        <version.plugin.failsafe>3.0.0</version.plugin.failsafe>
+        <version.plugin.taglist>3.0.0</version.plugin.taglist>
     </properties>
 
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.amashchenko.maven.plugin</groupId>
+                    <artifactId>gitflow-maven-plugin</artifactId>
+                    <version>${version.plugin.gitflow}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-maven-plugin</artifactId>
+                    <version>${version.plugin.javafx-maven-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${version.plugin.surefire}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>${version.plugin.failsafe}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>taglist-maven-plugin</artifactId>
+                    <version>${version.plugin.taglist}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>${exec.mainClass}</mainClass> 
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.typesafe</groupId>
+                <artifactId>config</artifactId>
+                <version>${version.lib.hocon}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${version.lib.slf4j}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${version.lib.logback}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${version.lib.h2}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${version.lib.hibernate}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.weld.se</groupId>
+                <artifactId>weld-se-core</artifactId>
+                <version>${version.lib.weld-se}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-controls</artifactId>
+                <version>${version.lib.javafx}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-fxml</artifactId>
+                <version>${version.lib.javafx}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${version.test.lib.junit}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.typesafe</groupId>
+            <artifactId>config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+        </dependency>
+    </dependencies>
 
     <profiles>
         <profile>
@@ -34,18 +155,8 @@
                 </file>
             </activation>
             <properties>
-                <version.plugin.gitflow>1.19.0</version.plugin.gitflow>
             </properties>
             <build>
-                <pluginManagement>
-                    <plugins>
-                        <plugin>
-                            <groupId>com.amashchenko.maven.plugin</groupId>
-                            <artifactId>gitflow-maven-plugin</artifactId>
-                            <version>${version.plugin.gitflow}</version>
-                        </plugin>
-                    </plugins>
-                </pluginManagement>
                 <plugins>
                     <plugin>
                         <groupId>com.amashchenko.maven.plugin</groupId>
@@ -66,6 +177,81 @@
                 </plugins>
             </build>
         </profile>
+        <!-- Taglist (issues) support -->
+        <profile>
+            <id>taglist-support</id>
+            <activation>
+                <file>
+                    <exists>src/main/java</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>taglist-maven-plugin</artifactId>
+                        <configuration>
+                            <tagListOptions>
+                                <tagClasses>
+                                    <tagClass>
+                                        <displayName>TODO Work</displayName>
+                                        <tags>
+                                            <tag>
+                                                <matchString>todo</matchString>
+                                                <matchType>ignoreCase</matchType>
+                                            </tag>
+                                            <tag>
+                                                <matchString>FIXME</matchString>
+                                                <matchType>exact</matchType>
+                                            </tag>
+                                            <tag>
+                                                <matchString>@deprecated</matchString>
+                                                <matchType>exact</matchType>
+                                            </tag>
+                                        </tags>
+                                    </tagClass>
+                                </tagClasses>
+                            </tagListOptions>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+            <reporting>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>taglist-maven-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </reporting>
+        </profile>
+        <!-- Testing support -->
+        <profile>
+            <id>testing-support</id>
+            <activation>
+                <file>
+                    <exists>src/test/java</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>org.junit.jupiter</groupId>
+                    <artifactId>junit-jupiter-engine</artifactId>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <!-- Logging support -->
         <profile>
             <id>logger-support</id>
             <activation>
@@ -73,72 +259,37 @@
                     <exists>src/main/java</exists>
                 </file>
             </activation>
-            <properties>
-                <version.lib.sfl4j>2.0.7</version.lib.sfl4j>
-            </properties>
-            <dependencyManagement>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.slf4j</groupId>
-                        <artifactId>slf4j-simple</artifactId>
-                        <version>${version.lib.sfl4j}</version>
-                    </dependency>
-                </dependencies>
-            </dependencyManagement>
             <dependencies>
                 <dependency>
                     <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-simple</artifactId>
+                    <artifactId>slf4j-api</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
                 </dependency>
             </dependencies>
         </profile>
+        <!-- JPA support -->
         <profile>
-            <id>javafx-support</id>
+            <id>jpa-support</id>
             <activation>
                 <file>
-                    <exists>src/main/java</exists>
+                    <exists>src/main/resources/META-INF/persistence.xml</exists>
                 </file>
             </activation>
-            <properties>
-                <version.plugin.javafx>0.0.8</version.plugin.javafx>
-                <version.lib.javafx>20.0.1</version.lib.javafx>
-            </properties>
-            <dependencyManagement>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.openjfx</groupId>
-                        <artifactId>javafx-controls</artifactId>
-                        <version>${version.lib.javafx}</version>
-                    </dependency>
-                </dependencies>
-            </dependencyManagement>
-            <build>
-                <pluginManagement>
-                    <plugins>
-                        <plugin>
-                            <groupId>org.openjfx</groupId>
-                            <artifactId>javafx-maven-plugin</artifactId>
-                            <version>${version.plugin.javafx}</version>
-                        </plugin>
-                    </plugins>
-                </pluginManagement>
-                <plugins>
-                    <plugin>
-                        <groupId>org.openjfx</groupId>
-                        <artifactId>javafx-maven-plugin</artifactId>
-                        <configuration>
-                            <mainClass>${exec.mainClass}</mainClass> 
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
             <dependencies>
                 <dependency>
-                    <groupId>org.openjfx</groupId>
-                    <artifactId>javafx-controls</artifactId>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>org.hibernate</groupId>
+                    <artifactId>hibernate-core</artifactId>
                 </dependency>
             </dependencies>
         </profile>
+        <!-- CDI support -->
         <profile>
             <id>cdi-support</id>
             <activation>
@@ -146,15 +297,6 @@
                     <exists>src/main/resources/META-INF/beans.xml</exists>
                 </file>
             </activation>
-            <dependencyManagement>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.jboss.weld.se</groupId>
-                        <artifactId>weld-se-core</artifactId>
-                        <version>5.1.0.Final</version>
-                    </dependency>
-                </dependencies>
-            </dependencyManagement>
             <dependencies>
                 <dependency>
                     <groupId>org.jboss.weld.se</groupId>

@@ -3,13 +3,9 @@ target/
 
 # Eclipse
 .settings/
-.project
 .classpath
+.project
 
-# Idea
-.idea/
-*.iml
-
-# NetBeans
+# Netbeans
 nb-configuration.xml
 nbactions.xml
