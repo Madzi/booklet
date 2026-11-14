@@ -1,5 +1,0 @@
-= booklet
-:toc:
-
-== Introduction
-Ebook management system
