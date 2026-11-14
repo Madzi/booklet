@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <layout class="ch.qos.logback.classic.PatternLayout">
-            <Pattern>
-                %d{HH:mm:ss:SSS} %-5level [%t] %logger{36} - %msg%n
-            </Pattern>
-        </layout>
+
+    <!-- Console appender -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
     </appender>
 
+    <!-- Root logger -->
     <root level="INFO">
-        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="STDOUT" />
     </root>
+
+    <!-- Optional: specific loggers for your project -->
+    <!-- 
+    <logger name="io.github.madzi.jerpg" level="DEBUG"/>
+    <logger name="dev.langchain4j" level="DEBUG"/>
+    -->
+
 </configuration>
