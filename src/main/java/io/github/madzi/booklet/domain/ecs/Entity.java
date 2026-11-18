@@ -4,13 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * Сущность.
- * Содержит ID и реестр компонентов.
- * Компоненты сущности могут динамически добавлятся и удалятся.
- * Для правильной работы необходимо чтобы у компонентов были реализованы {@code equals} и {@code hashcode}.
- * Идеально в качестве компонентов подходит {@code record}.
- */
 public record Entity(EntityId id, Map<Class<? extends Component>, Component> components) {
 
     public Entity() {
@@ -25,31 +18,19 @@ public record Entity(EntityId id, Map<Class<? extends Component>, Component> com
         this(builder.id, builder.components);
     }
 
-    /**
-     * Проверяет наличие компонента у сущности.
-     */
     public <C extends Component> boolean has(final Class<C> clazz) {
         return components.containsKey(clazz);
     }
 
-    /**
-     * Возвращает контейнер с компонентом, или пустой.
-     */
     public <C extends Component> Optional<C> get(final Class<C> clazz) {
         return Optional.ofNullable(clazz.cast(components.get(clazz)));
     }
 
-    /**
-     * Добавляет компонент к сущности.
-     */
     public <C extends Component> C add(final C component) {
         components.put(component.getClass(), component);
         return component;
     }
 
-    /**
-     * Удаляет компонент из сущности.
-     */
     public <C extends Component> C remove(final Class<C> clazz) {
         return clazz.cast(components.remove(clazz));
     }

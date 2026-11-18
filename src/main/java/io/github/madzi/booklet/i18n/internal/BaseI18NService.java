@@ -4,9 +4,6 @@ import java.util.ResourceBundle;
 
 import io.github.madzi.booklet.i18n.I18NService;
 
-/**
- * BaseMessageService
- */
 public record BaseI18NService(ResourceBundle bundle) implements I18NService {
 
     @Override

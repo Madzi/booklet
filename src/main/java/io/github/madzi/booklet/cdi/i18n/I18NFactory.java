@@ -7,9 +7,6 @@ import io.github.madzi.booklet.i18n.internal.BaseI18NService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
 
-/**
- * I18NFactory
- */
 @ApplicationScoped
 public class I18NFactory {
 
